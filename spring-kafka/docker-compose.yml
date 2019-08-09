@@ -22,12 +22,21 @@ services:
   mysql:
     image: mariadb
     restart: always
+    volumes:
+      - "~/data/mariadb:/var/lib/mysql"
     environment:
       MYSQL_ROOT_PASSWORD: test_kafka
+      MYSQL_DATABASE: test_kafka
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - 33061:3306
   mongo:
     image: mongo
     command: --smallfiles
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - 27017:27017
     
