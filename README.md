@@ -2,4 +2,4 @@
 
 * Início com Spring Boot (Consumer / Producer)
 
-* Início com NodeJS (Consumer / Producer)
+* Início com NodeJS (Producer / Consumer MySql)
