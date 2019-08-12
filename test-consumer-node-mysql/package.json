@@ -1,0 +1,25 @@
+{
+  "name": "consumer-node-mysql",
+  "version": "1.0.0",
+  "description": "Consumer para o Producer NodeJS",
+  "main": "index.js",
+  "dependencies": {
+    "kafka-node": "^4.1.3",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saulocn/estudo-kafka.git"
+  },
+  "author": "Saulo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saulocn/estudo-kafka/issues"
+  },
+  "homepage": "https://github.com/saulocn/estudo-kafka#readme"
+}
