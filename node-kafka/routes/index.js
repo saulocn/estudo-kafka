@@ -2,16 +2,17 @@ const router = new (require('restify-router')).Router()
 const uuidv4 = require('uuid/v4')
 const sendTransaction = require('../producer/transaction-producer')
 
-const pluck = (object, ...keys) => {
-    const newObject = {};
-    keys.forEach(key => newObject[key] = object[key])
-    return newObject;
-};
+const getTransaction = reqBody =>{
+	const transaction = {}
+	transaction.person_id = Number(reqBody.transaction.person_id)
+	transaction.value = Number(reqBody.transaction.value)
+	transaction.creation_date = new Date(reqBody.transaction.creation_date)
+	transaction.id = uuidv4()
+	return transaction
+}
 
 router.post('/transactions/', function (req, res, next) {
-	const transaction = pluck(req.body.transaction, 'creation_date', 'value', 'person_id')
-	transaction.creation_date = new Date()
-	transaction.id = uuidv4()
+	const transaction = getTransaction(req.body)
 	res.json({
 		transaction
 	});
