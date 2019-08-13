@@ -3,15 +3,22 @@ const consumeTransaction = () => new Promise((resolve, reject) => {
     Consumer = kafka.Consumer,
     client = new kafka.KafkaClient()
     const consumer = new Consumer(client, [{ topic: 'kafka_example', partition: 0 }], { autoCommit: false, fromOffset: true })
-    consumer.on('message', message => {
+    const consumeMessage = message => {
         const transaction = JSON.parse(message.value)
-        resolve(transaction)
+        consumer.removeListener('message', consumeMessage)
+        consumer.removeListener('error', handleError)
         consumer.close()
-        return;
-    });
-    consumer.on('error', function (err) {
+        resolve(transaction)
+        return
+    }
+    const handleError = err => {
+        consumer.removeListener('message', consumeMessage)
+        consumer.removeListener('error', handleError)
+        consumer.close()
         reject(err)
-        return;
-    });
+        return
+    }
+    consumer.on('message', consumeMessage)
+    consumer.on('error', handleError)
 })
 module.exports = consumeTransaction
