@@ -1,3 +1,4 @@
+require('events').EventEmitter.defaultMaxListeners = 15
 const restify = require('restify');
 const router = new (require('restify-router')).Router();
 const server = restify.createServer({
